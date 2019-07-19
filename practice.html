@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Keyboard events</title>
+  <style>
+   body {
+   background: linear-gradient(to bottom, #95cde2, #cbe3ec);
+   }
+   h1 {
+   color: #49475B;
+   }
+   h3 {
+   color: #9E788F;
+   }
+  </style>
+  <script>
+   var keypressed = 0;
+   var keyup = 0;
+   var keydown = 0;
+   var change = 0;
+   
+   function showNumbers() {
+     document.getElementById("div2").innerHTML = '<p>' + 'onKeyPressed: ' + keypressed + '<br>' +
+                                               'onKeyUp: ' + keyup + '<br>' +
+                                               'onKeyDown: ' + keydown + '<br>' +
+                                               'onChange: ' + change + '<br>' + '</p>';
+   }
+   
+   function keypress(event) {
+    keypressed++;
+    var x = (event.keyCode || event.which);
+    var x_char = String.fromCharCode(x);
+    showNumbers();
+    if (x_char == 'f') {
+      event.preventDefault();
+    }
+   }
+   
+   function keyupp() {
+    keyup++;
+    showNumbers();
+   }
+   
+   function keydownn() {
+    keydown++;
+    showNumbers();
+   }
+   
+   function onchang() {
+    change++;
+    showNumbers();
+   }
+   
+   function fillDiv() {
+    var text = document.getElementById("inp").value;
+    var result = text.replace(/a/gi,"A");
+    document.getElementById('divChange').innerHTML = result;
+   }
+   
+  </script>
+ </head>
+ <body>
+ <h1>Лабораторная работа №3</h1>
+ <h3>Задание 1</h3>
+ <p>Создать элемент, реагирующий на события клавиатуры. Результаты реакции выводятся отдельно. Символ "f" печататься не должен.</p>
+  <div>
+   <input type="text" placeholder="Ваши символы" style="margin-left: 10px" onKeyDown="keydownn()" onKeyUp="keyupp()" onKeyPress="keypress(event)" onChange="onchang()">
+  </div>
+  <div id="div2"></div>
+  <hr>
+  <h3>Задание 2</h3>
+  <p>Создать на странице элемент HTML <code>&lt;input type=text&gt;</code> и элемент <code>&lt;div&gt;&lt;/div&gt;</code>. Написать обработчики событий так, чтобы при наборе текста в элементе <code>&lt;input...&gt;</code> он так же появлялся и в элементе <code>&lt;div&gt;&lt;/div&gt;</code>, причем все буквы "a", набираемые в элементе <code>&lt;input...&gt;</code>, при выводе в элемент <code>&lt;div&gt;&lt;/div&gt;</code> замещались бы на букву "A".</p>
+  <input type="text" id="inp" placeholder="Ваши символы" onKeyUp="fillDiv(event)">
+  <div id="divChange"></div>
+ </body>
+</html>
